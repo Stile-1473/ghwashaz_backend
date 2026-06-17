@@ -1,4 +1,4 @@
-package Ascenso.sytem.purchase.entity;
+package Ascenso.sytem.supplier.entity;
 
 
 import Ascenso.sytem.product.entity.Product;

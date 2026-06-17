@@ -1,7 +1,6 @@
-package Ascenso.sytem.purchase.entity;
+package Ascenso.sytem.supplier.entity;
 
 import Ascenso.sytem.common.enums.PurchaseOrderStatus;
-import Ascenso.sytem.supplier.entity.Supplier;
 import Ascenso.sytem.user.entity.User;
 import Ascenso.sytem.common.entity.BaseEntity;
 import jakarta.persistence.*;
