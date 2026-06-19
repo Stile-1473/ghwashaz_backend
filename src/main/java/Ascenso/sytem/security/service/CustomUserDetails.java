@@ -1,7 +1,7 @@
 package Ascenso.sytem.security.service;
 
 import Ascenso.sytem.user.entity.Permission;
-import Ascenso.sytem.user.entity.Roles;
+import Ascenso.sytem.user.entity.Role;
 import Ascenso.sytem.user.entity.User;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
@@ -26,7 +26,7 @@ public class CustomUserDetails implements UserDetails {
 
         Set<GrantedAuthority> authorities = new HashSet<>();
 
-        for(Roles role : user.getRoles()){
+        for(Role role : user.getRoles()){
             authorities.add(
                     new SimpleGrantedAuthority(
                             "ROLE_" + role.getName()

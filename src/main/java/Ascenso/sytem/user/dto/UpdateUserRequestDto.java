@@ -1,6 +1,6 @@
 package Ascenso.sytem.user.dto;
 
-import Ascenso.sytem.user.entity.Roles;
+import Ascenso.sytem.user.entity.Role;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -16,5 +16,5 @@ public class UpdateUserRequestDto {
     private String phoneNumber;
 
     @NotNull
-    private Roles role;
+    private Role role;
 }

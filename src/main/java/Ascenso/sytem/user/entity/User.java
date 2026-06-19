@@ -35,7 +35,7 @@ public class User extends BaseEntity {
            inverseJoinColumns = @JoinColumn(name="role_id")
    )
    @Builder.Default
-   private Set<Roles> roles = new HashSet<>();
+   private Set<Role> roles = new HashSet<>();
 
   private   Boolean enabled;
 
