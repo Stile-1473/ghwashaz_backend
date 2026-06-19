@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Builder
-public class ProfitResponseDto {
+public class ProfitReportResponseDto {
 
     private BigDecimal revenue;
 

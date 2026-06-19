@@ -26,6 +26,7 @@ public class Notification extends BaseEntity {
     private NotificationType type;
 
     @Column(nullable = false)
+    @Builder.Default
     private Boolean isRead = false;
 
     @ManyToOne(fetch = FetchType.LAZY)

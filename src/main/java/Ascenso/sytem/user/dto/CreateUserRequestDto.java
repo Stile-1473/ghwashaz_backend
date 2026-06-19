@@ -1,6 +1,6 @@
 package Ascenso.sytem.user.dto;
 
-import Ascenso.sytem.common.enums.Role;
+import Ascenso.sytem.user.entity.Roles;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -22,7 +22,7 @@ public class CreateUserRequestDto {
 
 
     @NotNull(message = "Role is required")
-    private Role role;
+    private Roles role;
 
     @NotBlank(message = "Password is required")
     private String password;

@@ -1,11 +1,11 @@
 package Ascenso.sytem.user.dto;
 
-import Ascenso.sytem.common.enums.Role;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -19,9 +19,10 @@ public class UserResponseDto {
 
     private String phoneNumber;
 
-    private Role role;
+    private Set<String> permissions;
 
     private Boolean active;
+
 
     private LocalDateTime createdAt;
 

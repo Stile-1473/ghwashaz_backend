@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @Builder
@@ -12,5 +14,9 @@ public class AuthResponseDto {
 
     private String token;
 
-    private UserResponseDto userResponseDto;
+    private UserResponseDto user;
+
+    private LocalDateTime loginTime;
+
+
 }

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Builder
-public class SalesResponseDto {
+public class SalesReportResponseDto {
 
     private String saleNumber;
 

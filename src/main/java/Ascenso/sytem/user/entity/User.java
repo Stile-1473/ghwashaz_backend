@@ -1,14 +1,12 @@
 package Ascenso.sytem.user.entity;
 
-import Ascenso.sytem.common.enums.Role;
 import Ascenso.sytem.common.entity.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(
@@ -19,6 +17,7 @@ import java.time.LocalDateTime;
 )
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class User extends BaseEntity {
@@ -29,9 +28,24 @@ public class User extends BaseEntity {
 
     private String passwordHash;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+   @ManyToMany(fetch = FetchType.EAGER)
+   @JoinTable(
+           name = "user_roles",
+           joinColumns = @JoinColumn(name = "user_id"),
+           inverseJoinColumns = @JoinColumn(name="role_id")
+   )
+   @Builder.Default
+   private Set<Roles> roles = new HashSet<>();
 
+  private   Boolean enabled;
+
+  private   Boolean locked;
+
+   private Boolean credentialsExpired;
+
+    private Boolean accountExpired;
+
+    @Builder.Default
     private Boolean active = true;
 
     private LocalDateTime lastLogin;
