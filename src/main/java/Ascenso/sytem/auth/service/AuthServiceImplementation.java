@@ -71,7 +71,7 @@ public class AuthServiceImplementation implements  AuthServiceContract{
                 .fullName(user.getFullName())
                 .phoneNumber(user.getPhoneNumber())
                 .permissions(permissions)
-                .active(user.getActive())
+                .enabled(user.getEnabled())
                 .createdAt(user.getCreatedAt())
                 .build();
 

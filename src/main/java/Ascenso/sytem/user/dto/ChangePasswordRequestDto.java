@@ -16,4 +16,7 @@ public class ChangePasswordRequestDto {
 
     @NotBlank
     private String newPassword;
+
+    @NotBlank
+    private String confirmPassword;
 }

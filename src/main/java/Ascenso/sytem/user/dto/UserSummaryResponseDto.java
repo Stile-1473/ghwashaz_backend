@@ -4,14 +4,13 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
 @Getter
 @Setter
 @Builder
-public class UserResponseDto {
+public class UserSummaryResponseDto {
 
     private UUID id;
 
@@ -19,14 +18,8 @@ public class UserResponseDto {
 
     private String phoneNumber;
 
-    private Set<String> permissions;
-
-    private Set<String> roles;
-
     private Boolean enabled;
 
-    private LocalDateTime lastLogin;
-
-    private LocalDateTime createdAt;
+    private Set<String> roles;
 
 }

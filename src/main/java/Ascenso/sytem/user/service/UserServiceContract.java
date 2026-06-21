@@ -1,9 +1,6 @@
 package Ascenso.sytem.user.service;
 
-import Ascenso.sytem.user.dto.ChangePasswordRequestDto;
-import Ascenso.sytem.user.dto.CreateUserRequestDto;
-import Ascenso.sytem.user.dto.UpdateUserRequestDto;
-import Ascenso.sytem.user.dto.UserResponseDto;
+import Ascenso.sytem.user.dto.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -14,6 +11,13 @@ public interface UserServiceContract {
     UserResponseDto createUser(CreateUserRequestDto requestDto);
 
     UserResponseDto getUserById(UUID id);
+
+
+
+    void resetPassword(
+            UUID id,
+            ResetPasswordRequestDto requestDto
+    );
 
     Page<UserResponseDto> getUsers(
             String search,
@@ -36,4 +40,5 @@ public interface UserServiceContract {
      );
 
 
+    void activateUser(UUID id);
 }
