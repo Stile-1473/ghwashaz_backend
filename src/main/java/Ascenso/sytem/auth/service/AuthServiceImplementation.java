@@ -2,6 +2,7 @@ package Ascenso.sytem.auth.service;
 
 import Ascenso.sytem.auth.dto.AuthResponseDto;
 import Ascenso.sytem.auth.dto.LoginRequestDto;
+import Ascenso.sytem.common.utils.PhoneNumberUtils;
 import Ascenso.sytem.security.jwt.JwtService;
 import Ascenso.sytem.security.service.CustomUserDetails;
 import Ascenso.sytem.user.dto.UserResponseDto;
@@ -26,9 +27,11 @@ public class AuthServiceImplementation implements  AuthServiceContract{
 
     @Override
     public AuthResponseDto login(LoginRequestDto requestDto) {
+        String phoneNumber = PhoneNumberUtils.normalize(requestDto.getPhoneNumber());
+
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        requestDto.getPhoneNumber(),
+                        phoneNumber,
                         requestDto.getPassword()
                 )
 

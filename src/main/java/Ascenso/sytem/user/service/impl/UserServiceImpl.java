@@ -1,11 +1,11 @@
 package Ascenso.sytem.user.service.impl;
 
 import Ascenso.sytem.common.exception.BadRequestException;
+import Ascenso.sytem.common.utils.PhoneNumberUtils;
 import Ascenso.sytem.user.dto.*;
 import Ascenso.sytem.user.entity.Role;
 import Ascenso.sytem.user.entity.User;
 import Ascenso.sytem.user.mapper.UserMapper;
-import Ascenso.sytem.user.repository.RoleRepository;
 import Ascenso.sytem.user.repository.UserRepository;
 import Ascenso.sytem.user.service.UserServiceContract;
 import Ascenso.sytem.user.specification.UserSpecification;
@@ -29,8 +29,6 @@ public class UserServiceImpl implements UserServiceContract {
 
     private final UserRepository userRepository;
 
-    private final RoleRepository roleRepository;
-
     private final PasswordEncoder passwordEncoder;
 
     private final UserMapper userMapper;
@@ -39,11 +37,13 @@ public class UserServiceImpl implements UserServiceContract {
 
     @Override
     public UserResponseDto createUser(CreateUserRequestDto requestDto) {
-        userValidator.validateUniquePhoneNumber(requestDto.getPhoneNumber());
+        String phoneNumber = PhoneNumberUtils.normalize(requestDto.getPhoneNumber());
+        userValidator.validateUniquePhoneNumber(phoneNumber);
 
         Set<Role> roles = userValidator.validateRoles(requestDto.getRoleIds());
 
         User user = userMapper.toEntity(requestDto);
+        user.setPhoneNumber(phoneNumber);
 
         user.setPasswordHash(passwordEncoder.encode(requestDto.getPassword()));
 
@@ -99,14 +99,16 @@ public class UserServiceImpl implements UserServiceContract {
     @Override
     public UserResponseDto updateUser(UUID id, UpdateUserRequestDto requestDto) {
         User user =  userValidator.validateUserExists(id);
+        String phoneNumber = PhoneNumberUtils.normalize(requestDto.getPhoneNumber());
 
-        if(!user.getPhoneNumber().equals(requestDto.getPhoneNumber())){
-            userValidator.validateUniquePhoneNumber(requestDto.getPhoneNumber());
+        if(!user.getPhoneNumber().equals(phoneNumber)){
+            userValidator.validateUniquePhoneNumber(phoneNumber);
         }
 
         Set<Role> roles = userValidator.validateRoles(requestDto.getRoleIds());
 
         userMapper.updateEntity(requestDto,user);
+        user.setPhoneNumber(phoneNumber);
 
         user.setRoles(roles);
 

@@ -3,7 +3,11 @@ package Ascenso.sytem.user.controller;
 import Ascenso.sytem.common.response.ApiResponse;
 import Ascenso.sytem.user.dto.ChangePasswordRequestDto;
 import Ascenso.sytem.user.dto.CreateUserRequestDto;
+import Ascenso.sytem.user.dto.ResetPasswordRequestDto;
 import Ascenso.sytem.user.dto.UpdateUserRequestDto;
+
+import Ascenso.sytem.security.util.SecurityUtils;
+
 import Ascenso.sytem.user.dto.UserResponseDto;
 import Ascenso.sytem.user.service.UserServiceContract;
 import jakarta.validation.Valid;
@@ -25,7 +29,7 @@ public class UserController {
     //create user APi
 
     @PostMapping
-    @PreAuthorize("hasAuthority(T(Ascenso.system.common.constants.Permissions).USER_MANAGE)")
+    @PreAuthorize("hasAuthority(T(Ascenso.sytem.common.constants.Permissions).USER_MANAGE)")
     public ResponseEntity<ApiResponse<UserResponseDto>> create(
             @Valid
             @RequestBody CreateUserRequestDto dto){
@@ -44,7 +48,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     @PreAuthorize(
-            "hasAuthority(T(Ascenso.system.common.constants.Permissions).USER_MANAGE)"
+            "hasAuthority(T(Ascenso.sytem.common.constants.Permissions).USER_MANAGE)"
     )
     public ResponseEntity<ApiResponse<UserResponseDto>> getUser(
             @PathVariable
@@ -62,7 +66,7 @@ public class UserController {
 
     @PutMapping("/{id}")
     @PreAuthorize(
-            "hasAuthority(T(Ascenso.system.common.constants.Permissions).USER_MANAGE)"
+            "hasAuthority(T(Ascenso.sytem.common.constants.Permissions).USER_MANAGE)"
     )
     public ResponseEntity<ApiResponse<UserResponseDto>> updateUser(
             @Valid
@@ -127,21 +131,80 @@ public class UserController {
     @PreAuthorize(
             "hasAuthority(T(Ascenso.system.common.constants.Permissions).USER_MANAGE)"
     )
+    public ResponseEntity<ApiResponse> changePassword(
+            @Valid
+            @PathVariable UUID id,
+            @RequestBody ChangePasswordRequestDto dto
+    ) {
 
-    public ResponseEntity<ApiResponse> activateUser(@Valid @PathVariable UUID id, @RequestBody ChangePasswordRequestDto dto) {
+        userService.changePassword(id, dto);
 
-        userService.changePassword(id,dto);
-        return  ResponseEntity.ok( ApiResponse.builder()
-                .success(true)
-                .message("User enabled successfully")
-                .data(null)
-                .build()
-
+        return ResponseEntity.ok(
+                ApiResponse.builder()
+                        .success(true)
+                        .message("Password changed successfully")
+                        .data(null)
+                        .build()
         );
 
+    }
 
+    @PatchMapping("/{id}/reset-password")
+    @PreAuthorize(
+            "hasAuthority(T(Ascenso.system.common.constants.Permissions).USER_MANAGE)"
+    )
+    public ResponseEntity<ApiResponse> resetPassword(
+            @Valid
+            @PathVariable UUID id,
+            @RequestBody ResetPasswordRequestDto dto
+    ) {
+
+        userService.resetPassword(id, dto);
+
+        return ResponseEntity.ok(
+                ApiResponse.builder()
+                        .success(true)
+                        .message("Password reset successfully")
+                        .data(null)
+                        .build()
+        );
 
     }
+
+    @GetMapping
+    @PreAuthorize(
+            "hasAuthority(T(Ascenso.system.common.constants.Permissions).USER_MANAGE)"
+    )
+    public ResponseEntity<ApiResponse<?>> searchUsers(
+            @RequestParam(name = "search", required = false) String search,
+            @RequestParam(name = "enabled", required = false) Boolean enabled,
+            org.springframework.data.domain.Pageable pageable
+    ) {
+
+        return ResponseEntity.ok(
+                ApiResponse.builder()
+                        .success(true)
+                        .message("Users fetched successfully")
+                        .data(userService.getUsers(search, enabled, pageable))
+                        .build()
+        );
+
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<ApiResponse<UserResponseDto>> me() {
+
+        UUID currentUserId = SecurityUtils.getCurrentUserId();
+        return ResponseEntity.ok(
+                ApiResponse.<UserResponseDto>builder()
+                        .success(true)
+                        .message("Current user fetched successfully")
+                        .data(userService.getUserById(currentUserId))
+                        .build()
+        );
+
+    }
+
 
 
 

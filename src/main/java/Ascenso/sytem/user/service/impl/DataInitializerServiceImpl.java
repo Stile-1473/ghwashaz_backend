@@ -173,7 +173,6 @@ public class DataInitializerServiceImpl implements DataIntializerServiceContract
                 .enabled(true)
                 .accountExpired(false)
                 .locked(false)
-                .active(true)
                 .credentialsExpired(false)
                 .roles(Set.of(ownerRole))
 

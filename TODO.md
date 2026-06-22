@@ -1,9 +1,13 @@
 # TODO
 
-- [ ] Update JWT security handlers to return JSON `ErrorResponse` instead of plain `sendError`.
-  - File: src/main/java/Ascenso/sytem/security/handler/JwtAuthenticationEntryPoint.java (401)
-  - File: src/main/java/Ascenso/sytem/security/handler/JwtAccessDeniedHandler.java (403)
-- [ ] Ensure responses include: success=false, status, message, error, path, timestamp.
-- [ ] (Optional) Adjust JwtAuthenticationFilter to throw/handle invalid tokens consistently.
-- [ ] Run app / test endpoint with valid & invalid tokens; verify Postman shows JSON body.
+- [x] Update JWT security handlers to return JSON `ErrorResponse` instead of plain `sendError`.
+- [x] Ensure responses include: success=false, status, message, error, path, timestamp.
+- [ ] Ensure UserController implements all user endpoints: reset-password, search users, and /me.
+- [ ] Fix UserController change-password endpoint response message and method naming.
+- [ ] Apply PhoneNumberUtils.normalize() during create/update/search/lookup consistently (likely in service/validator).
+- [ ] Add tests or run manual endpoint checks for:
+  - /api/v1/users/{id}/change-password
+  - /api/v1/users/{id}/reset-password
+  - /api/v1/users?search=&enabled=&page=&size
+  - /api/v1/users/me
 

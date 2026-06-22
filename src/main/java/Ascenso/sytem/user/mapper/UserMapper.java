@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 @Mapper(config = MapperConfiguration.class)
 public interface UserMapper {
+
     @Mapping(target = "passwordHash",ignore = true)
     @Mapping(target = "roles",ignore = true)
     @Mapping(target = "enabled", ignore = true)
@@ -26,8 +27,16 @@ public interface UserMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "roles", ignore = true)
-    @Mapping(target = "password", ignore = true)
+    @Mapping(target = "passwordHash", ignore = true)
     @Mapping(target = "lastLogin", ignore = true)
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "syncStatus", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "enabled", ignore = true)
+    @Mapping(target = "locked", ignore = true)
+    @Mapping(target = "credentialsExpired", ignore = true)
+    @Mapping(target = "accountExpired", ignore = true)
     void updateEntity(UpdateUserRequestDto dto,
                       @MappingTarget User user);
 

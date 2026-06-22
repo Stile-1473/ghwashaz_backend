@@ -2,15 +2,13 @@ package Ascenso.sytem.user.validator;
 
 import Ascenso.sytem.common.exception.BadRequestException;
 import Ascenso.sytem.common.exception.ResourceNotFoundException;
+import Ascenso.sytem.common.utils.PhoneNumberUtils;
 import Ascenso.sytem.security.util.SecurityUtils;
 import Ascenso.sytem.user.entity.Role;
 import Ascenso.sytem.user.entity.User;
-import Ascenso.sytem.user.mapper.UserMapper;
 import Ascenso.sytem.user.repository.RoleRepository;
 import Ascenso.sytem.user.repository.UserRepository;
-import jakarta.persistence.Column;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -27,11 +25,15 @@ public class UserValidator {
 
     public void validateUniquePhoneNumber(String phoneNumber) {
 
-        if(userRepository.existsByPhoneNumber(phoneNumber)) {
-            throw new BadRequestException(
-                    "Phone number already exists"
-            );
-
+        try {
+            String normalized = PhoneNumberUtils.normalize(phoneNumber);
+            if(userRepository.existsByPhoneNumber(normalized)) {
+                throw new BadRequestException(
+                        "Phone number already exists"
+                );
+            }
+        } catch (IllegalArgumentException e) {
+            throw new BadRequestException(e.getMessage());
         }
 
     }

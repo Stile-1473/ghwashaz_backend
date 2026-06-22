@@ -17,9 +17,9 @@ import java.util.Set;
 )
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class User extends BaseEntity {
 
     private String fullName;
@@ -45,8 +45,7 @@ public class User extends BaseEntity {
 
     private Boolean accountExpired;
 
-    @Builder.Default
-    private Boolean active = true;
+
 
     private LocalDateTime lastLogin;
 
