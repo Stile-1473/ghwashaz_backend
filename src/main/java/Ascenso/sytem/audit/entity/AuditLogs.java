@@ -1,12 +1,11 @@
 package Ascenso.sytem.audit.entity;
 
+import Ascenso.sytem.common.enums.AuditActionType;
+import Ascenso.sytem.common.enums.AuditModule;
 import Ascenso.sytem.user.entity.User;
 import Ascenso.sytem.common.entity.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.UUID;
 
@@ -20,26 +19,35 @@ import java.util.UUID;
 )
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuditLogs extends BaseEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(
-            name = "user_id",
-            nullable = false
-    )
-    private User user;
+    @Column(nullable = false)
+    private String phoneNumber;
 
     @Column(nullable = false)
-    private String action;
+    private String fullName;
+
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false,length = 40)
+    private AuditModule module;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 40)
+    private AuditActionType action;
 
     @Column(nullable = false)
-    private String entityType;
-
     private UUID entityId;
 
-
-    @Column(columnDefinition = "TEXT")
+    @Column(length = 1000)
     private String description;
+
+    private String ipAddress;
+
+    private String device;
+
+
 }

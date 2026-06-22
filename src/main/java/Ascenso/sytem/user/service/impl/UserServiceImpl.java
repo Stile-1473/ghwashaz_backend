@@ -1,7 +1,11 @@
 package Ascenso.sytem.user.service.impl;
 
+import Ascenso.sytem.audit.service.AuditServiceContract;
+import Ascenso.sytem.common.enums.AuditActionType;
+import Ascenso.sytem.common.enums.AuditModule;
 import Ascenso.sytem.common.exception.BadRequestException;
 import Ascenso.sytem.common.utils.PhoneNumberUtils;
+import Ascenso.sytem.security.util.SecurityUtils;
 import Ascenso.sytem.user.dto.*;
 import Ascenso.sytem.user.entity.Role;
 import Ascenso.sytem.user.entity.User;
@@ -31,12 +35,15 @@ public class UserServiceImpl implements UserServiceContract {
 
     private final PasswordEncoder passwordEncoder;
 
+    private final AuditServiceContract auditService;
+
     private final UserMapper userMapper;
 
     private final UserValidator userValidator;
 
     @Override
     public UserResponseDto createUser(CreateUserRequestDto requestDto) {
+
         String phoneNumber = PhoneNumberUtils.normalize(requestDto.getPhoneNumber());
         userValidator.validateUniquePhoneNumber(phoneNumber);
 
@@ -59,9 +66,26 @@ public class UserServiceImpl implements UserServiceContract {
 
         User saveUser = userRepository.save(user);
 
-        log.info("User {} created successfully",saveUser.getPhoneNumber());
+        try {
+            auditService.log(
+                    AuditModule.USER,
+                    AuditActionType.CREATE,
+                    saveUser.getId(),
+                    "Created a new user " + user.getPhoneNumber()
+            );
+        } catch (Exception e) {
+            log.warn("Audit log failed for user create. userId={}, phoneNumber={} , error={}",
+                    saveUser.getId(),
+                    saveUser.getPhoneNumber(),
+                    e.getMessage(),
+                    e);
+        } finally {
+            log.info("User {} created successfully", saveUser.getPhoneNumber());
+            return userMapper.toResponse(saveUser);
+        }
 
-        return userMapper.toResponse(saveUser);
+
+
 
     }
 
@@ -120,9 +144,15 @@ public class UserServiceImpl implements UserServiceContract {
     }
 
     @Override
-    public void changePassword(UUID id, ChangePasswordRequestDto requestDto) {
-        User user = userValidator.validateUserExists(id);
+    public void changePassword( ChangePasswordRequestDto requestDto) throws IllegalAccessException {
 
+        User user = userValidator.validateUserExists(SecurityUtils.getCurrentUserId());
+
+        if(!user.getId().equals(SecurityUtils.getCurrentUserId())){
+            throw new IllegalAccessException(
+                    "You are allowed to only change your password"
+            );
+        }
         if(!passwordEncoder.matches(requestDto.getOldPassword(),user.getPasswordHash())){
             throw new BadRequestException(
                     "Old password is incorrect"

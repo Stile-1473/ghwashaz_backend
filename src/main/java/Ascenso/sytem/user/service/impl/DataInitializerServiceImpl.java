@@ -160,7 +160,7 @@ public class DataInitializerServiceImpl implements DataIntializerServiceContract
 
     private void createDefaultOwner(){
 
-        if(userRepository.findByPhoneNumber("0786828855").isPresent()){
+        if(userRepository.findByPhoneNumber("+263786828855").isPresent()){
             return;
         }
 
@@ -169,7 +169,7 @@ public class DataInitializerServiceImpl implements DataIntializerServiceContract
         User owner = User.builder()
                 .fullName("Kudakwashe Chishowerere")
                 .passwordHash(passwordEncoder.encode("kuda"))
-                .phoneNumber("0786828855")
+                .phoneNumber("+263786828855")
                 .enabled(true)
                 .accountExpired(false)
                 .locked(false)

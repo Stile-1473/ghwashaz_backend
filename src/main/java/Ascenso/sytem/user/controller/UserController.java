@@ -86,7 +86,7 @@ public class UserController {
 
     @PatchMapping("/{id}/activate")
     @PreAuthorize(
-            "hasAuthority(T(Ascenso.system.common.constants.Permissions).USER_MANAGE)"
+            "hasAuthority(T(Ascenso.sytem.common.constants.Permissions).USER_MANAGE)"
     )
 
     public ResponseEntity<ApiResponse> activateUser(@Valid @PathVariable UUID id) {
@@ -107,7 +107,7 @@ public class UserController {
 
     @PatchMapping("/{id}/deactivate")
     @PreAuthorize(
-            "hasAuthority(T(Ascenso.system.common.constants.Permissions).USER_MANAGE)"
+            "hasAuthority(T(Ascenso.sytem.common.constants.Permissions).USER_MANAGE)"
     )
 
     public ResponseEntity<ApiResponse> deactivateUser(@Valid @PathVariable UUID id) {
@@ -127,17 +127,16 @@ public class UserController {
 
 
 
-    @PatchMapping("/{id}/change-password")
+    @PatchMapping("/change-password")
     @PreAuthorize(
-            "hasAuthority(T(Ascenso.system.common.constants.Permissions).USER_MANAGE)"
+            "hasAuthority(T(Ascenso.sytem.common.constants.Permissions).USER_MANAGE)"
     )
     public ResponseEntity<ApiResponse> changePassword(
             @Valid
-            @PathVariable UUID id,
             @RequestBody ChangePasswordRequestDto dto
-    ) {
+    ) throws IllegalAccessException {
 
-        userService.changePassword(id, dto);
+        userService.changePassword( dto);
 
         return ResponseEntity.ok(
                 ApiResponse.builder()
@@ -151,7 +150,7 @@ public class UserController {
 
     @PatchMapping("/{id}/reset-password")
     @PreAuthorize(
-            "hasAuthority(T(Ascenso.system.common.constants.Permissions).USER_MANAGE)"
+            "hasAuthority(T(Ascenso.sytem.common.constants.Permissions).USER_MANAGE)"
     )
     public ResponseEntity<ApiResponse> resetPassword(
             @Valid
@@ -173,11 +172,9 @@ public class UserController {
 
     @GetMapping
     @PreAuthorize(
-            "hasAuthority(T(Ascenso.system.common.constants.Permissions).USER_MANAGE)"
+            "hasAuthority(T(Ascenso.sytem.common.constants.Permissions).USER_MANAGE)"
     )
-    public ResponseEntity<ApiResponse<?>> searchUsers(
-            @RequestParam(name = "search", required = false) String search,
-            @RequestParam(name = "enabled", required = false) Boolean enabled,
+    public ResponseEntity<ApiResponse<?>> searchUsers(@RequestParam(name = "search", required = false) String search, @RequestParam(name = "enabled", required = false) Boolean enabled,
             org.springframework.data.domain.Pageable pageable
     ) {
 

@@ -31,9 +31,9 @@ public interface UserServiceContract {
     );
 
      void changePassword(
-             UUID id,
+
              ChangePasswordRequestDto requestDto
-     );
+     ) throws IllegalAccessException;
 
      void deactivateUser(
              UUID id
