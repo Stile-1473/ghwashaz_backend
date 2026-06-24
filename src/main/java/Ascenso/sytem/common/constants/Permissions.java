@@ -10,7 +10,8 @@ public final class Permissions {
     public static  final String PRODUCT_DELETE = "PRODUCT_DELETE";
 
     public static final String CATEGORY_VIEW = "CATEGORY_VIEW";
-    public static final String CATEGORY_CREATE = "CATEGORY_CREATE";
+    public static final String CATEGORY_MANAGE = "CATEGORY_MANAGE";
+
 
     public static final String CUSTOMER_VIEW = "CUSTOMER_VIEW";
     public static final String CUSTOMER_CREATE = "CUSTOMER_CREATE";

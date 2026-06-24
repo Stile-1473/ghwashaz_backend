@@ -22,6 +22,8 @@ public class UpdateProductRequestDto {
     @NotNull
     private UUID categoryId;
 
+    private String barcode;
+
     @NotNull
     private BigDecimal sellingPrice;
 
@@ -29,7 +31,7 @@ public class UpdateProductRequestDto {
     private BigDecimal costPrice;
 
     @NotNull
-    private Unit unit;
+    private Unit productUnit;
 
     @Min(0)
     private Integer minimumStockLevel;

@@ -13,7 +13,6 @@ import java.util.UUID;
 @Table(
         name = "audit_logs",
         indexes = {
-                @Index(name = "idx_audit_user",columnList = "user_id"),
                 @Index(name = "idx_audit_date",columnList = "created_at")
         }
 )

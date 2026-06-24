@@ -1,7 +1,10 @@
 package Ascenso.sytem.product.service;
 
+import Ascenso.sytem.common.response.PageResponse;
 import Ascenso.sytem.product.dto.CategoryResponseDto;
 import Ascenso.sytem.product.dto.CreateCategoryRequestDto;
+import Ascenso.sytem.product.dto.UpdateCategoryRequestDto;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.UUID;
@@ -13,19 +16,25 @@ public interface CategoryServiceContract {
             CreateCategoryRequestDto request
     );
 
+    CategoryResponseDto updateCategory(
+            UUID id,
+            UpdateCategoryRequestDto request
+    );
+
 
     CategoryResponseDto getCategory(
             UUID id
     );
 
-
-    List<CategoryResponseDto> getCategories();
-
-
-    CategoryResponseDto updateCategory(
-            UUID id,
-            CreateCategoryRequestDto request
+    PageResponse<CategoryResponseDto> getCategories(
+            String search,
+            Boolean active,
+            Pageable pageable
     );
+
+
+
+
 
 
     void deactivateCategory(

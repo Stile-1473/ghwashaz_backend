@@ -17,14 +17,15 @@ public class ProductResponseDto {
  private UUID id;
  private String name;
  private String description;
+ private UUID categoryId;
  private String categoryName;
  private BigDecimal sellingPrice;
  private BigDecimal costPrice;
- private Unit unit;
+ private Unit productUnit;
  private String barcode;
  private Integer minimumStockLevel;
- private Boolean lowStock;
  private Boolean active;
+ private String imageUrl;
  private LocalDateTime createdAt;
 
 }

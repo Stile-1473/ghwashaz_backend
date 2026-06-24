@@ -107,7 +107,25 @@ public class UserServiceImpl implements UserServiceContract {
 
         userRepository.save(user);
 
-        log.info("Password reset for user {}",user.getPhoneNumber());
+        try {
+            auditService.log(
+                    AuditModule.USER,
+                    AuditActionType.RESET_PASSWORD,
+                    user.getId(),
+                    "User  password reset" + user.getPhoneNumber()
+            );
+        } catch (Exception e) {
+            log.warn("Audit log failed for user password reset. userId={}, phoneNumber={} , error={}",
+                    user.getId(),
+                    user.getPhoneNumber(),
+                    e.getMessage(),
+                    e);
+        } finally {
+            log.info("Password reset for user {}",user.getPhoneNumber());
+
+        }
+
+
     }
 
     @Override
@@ -138,9 +156,26 @@ public class UserServiceImpl implements UserServiceContract {
 
         User savedUser = userRepository.save(user);
 
-        log.info("User {} updated",savedUser.getPhoneNumber());
+        try {
+            auditService.log(
+                    AuditModule.USER,
+                    AuditActionType.UPDATE,
+                    user.getId(),
+                    "Updated user " + user.getPhoneNumber()
+            );
+        } catch (Exception e) {
+            log.warn("Audit log failed for user update. userId={}, phoneNumber={} , error={}",
+                    user.getId(),
+                    user.getPhoneNumber(),
+                    e.getMessage(),
+                    e);
+        } finally {
 
-        return  userMapper.toResponse(savedUser);
+            log.info("User {} updated",savedUser.getPhoneNumber());
+
+            return  userMapper.toResponse(savedUser);
+        }
+
     }
 
     @Override
@@ -166,7 +201,24 @@ public class UserServiceImpl implements UserServiceContract {
 
         userRepository.save(user);
 
-        log.info("Password changed for user {}",user.getPhoneNumber());
+        try {
+            auditService.log(
+                    AuditModule.USER,
+                    AuditActionType.CHANGE_PASSWORD,
+                    user.getId(),
+                    "User changed their password " + user.getPhoneNumber()
+            );
+        } catch (Exception e) {
+            log.warn("Audit log failed for user password change. userId={}, phoneNumber={} , error={}",
+                    user.getId(),
+                    user.getPhoneNumber(),
+                    e.getMessage(),
+                    e);
+        } finally {
+            log.info("Password changed for user {}",user.getPhoneNumber());
+
+        }
+
     }
 
     @Override
@@ -179,7 +231,26 @@ public class UserServiceImpl implements UserServiceContract {
 
         userRepository.save(user);
 
-        log.info("User {} disabled",user.getPhoneNumber());
+        try {
+            auditService.log(
+                    AuditModule.USER,
+                    AuditActionType.DISABLE,
+                    user.getId(),
+                    "Disabled user" + user.getPhoneNumber()
+
+            );
+        } catch (Exception e) {
+            log.warn("Audit log failed for disabling user. userId={}, phoneNumber={} , error={}",
+                    user.getId(),
+                    user.getPhoneNumber(),
+                    e.getMessage(),
+                    e);
+        }finally {
+            log.info("User {} disabled",user.getPhoneNumber());
+
+        }
+
+
     }
 
     @Override
@@ -190,6 +261,23 @@ public class UserServiceImpl implements UserServiceContract {
 
         userRepository.save(user);
 
-    log.info("User {} activated ",user.getPhoneNumber());
+        try {
+            auditService.log(
+                    AuditModule.USER,
+                    AuditActionType.ENABLE,
+                    user.getId(),
+                    "Activated user " + user.getPhoneNumber()
+            );
+        } catch (Exception e) {
+            log.warn("Audit log failed for activating user. userId={}, phoneNumber={} , error={}",
+                    user.getId(),
+                    user.getPhoneNumber(),
+                    e.getMessage(),
+                    e);
+        } finally {
+            log.info("User {} activated ",user.getPhoneNumber());
+
+        }
+
     }
 }

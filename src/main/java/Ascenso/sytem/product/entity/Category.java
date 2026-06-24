@@ -23,24 +23,16 @@ import java.util.List;
 @AllArgsConstructor
 public class Category extends BaseEntity {
 
-    @Column(
-            nullable = false,
-            unique = true,
-            length = 100
-    )
+    @Column(nullable = false, unique = true, length = 100)
     private String name;
 
     @Column(columnDefinition = "TEXT")
     private String description;
 
     @Column(nullable = false)
-    private Boolean isActive =true;
+    private Boolean active =true;
 
-    @OneToMany(
-            mappedBy = "category",
-            fetch = FetchType.LAZY
-    )
-    private List<Product> products = new ArrayList<>();
+
 
 
 

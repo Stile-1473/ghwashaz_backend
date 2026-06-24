@@ -44,7 +44,6 @@ public class AuditServiceImpl implements AuditServiceContract {
         User user = getCurrentUser();
 
         AuditLogs auditLog = AuditLogs.builder()
-
                 .phoneNumber(user.getPhoneNumber())
                 .fullName(user.getFullName())
                 .module(module)
@@ -54,6 +53,7 @@ public class AuditServiceImpl implements AuditServiceContract {
                 .ipAddress(getClientIp())
                 .device(getDevice())
                 .build();
+
 
         auditRepository.save(auditLog);
 

@@ -1,11 +1,34 @@
 package Ascenso.sytem.common.enums;
 
 public enum Unit {
-    PIECE,
-    BAG,
-    BOX,
-    LITRE,
-    METER,
-    KILOGRAM,
-    PACK
+
+        EACH,
+
+        KG,
+
+        GRAM,
+
+        LITRE,
+
+        MILLILITRE,
+
+        BAG,
+
+        BOX,
+
+        PACK,
+
+        PIECE,
+
+        METRE,
+
+        ROLL,
+
+        PAIR,
+
+        BUCKET,
+
+        CUP
+
+
 }

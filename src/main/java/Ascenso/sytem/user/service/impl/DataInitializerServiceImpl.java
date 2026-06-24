@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -54,7 +55,7 @@ public class DataInitializerServiceImpl implements DataIntializerServiceContract
                 Permissions.PRODUCT_DELETE,
 
                 Permissions.CATEGORY_VIEW,
-                Permissions.CATEGORY_CREATE,
+                Permissions.CATEGORY_MANAGE,
 
                 Permissions.CUSTOMER_VIEW,
                 Permissions.CUSTOMER_CREATE,
@@ -102,11 +103,16 @@ public class DataInitializerServiceImpl implements DataIntializerServiceContract
     }
 
     private void createOwnerRole(){
+        Set<Permission> permissions = new HashSet<>(permissionRepository.findAll());
+
+
         if(roleRepository.findByName(Roles.OWNER).isPresent()){
+            Role existingOwner = roleRepository.findByName(Roles.OWNER).orElseThrow();
+            existingOwner.setPermissions(permissions);
+            roleRepository.save(existingOwner);
+            log.info("OWNER role permissions synced");
             return;
         }
-
-        Set<Permission> permissions = Set.copyOf(permissionRepository.findAll());
 
         Role owner =  Role.builder()
                 .name(Roles.OWNER)
@@ -122,13 +128,12 @@ public class DataInitializerServiceImpl implements DataIntializerServiceContract
 
 
 
+
     private void createCashierRole() {
 
-        if (roleRepository.findByName(Roles.CASHIER).isPresent()) {
-            return;
-        }
+        Set<Permission> permissions = new HashSet<>(Set.of(
 
-        Set<Permission> permissions = Set.of(
+
                 permissionRepository.findByName(Permissions.PRODUCT_VIEW).orElseThrow(),
 
                 permissionRepository.findByName(Permissions.CUSTOMER_VIEW).orElseThrow(),
@@ -142,7 +147,15 @@ public class DataInitializerServiceImpl implements DataIntializerServiceContract
                 permissionRepository.findByName(Permissions.INVENTORY_VIEW).orElseThrow(),
 
                 permissionRepository.findByName(Permissions.CASH_VIEW).orElseThrow()
-        );
+        ));
+
+        if (roleRepository.findByName(Roles.CASHIER).isPresent()) {
+            Role existingCashier = roleRepository.findByName(Roles.CASHIER).orElseThrow();
+            existingCashier.setPermissions(permissions);
+            roleRepository.save(existingCashier);
+            log.info("CASHIER role permissions synced");
+            return;
+        }
 
         Role cashier = Role.builder()
                 .name(Roles.CASHIER)
@@ -156,6 +169,7 @@ public class DataInitializerServiceImpl implements DataIntializerServiceContract
 
 
     }
+
 
 
     private void createDefaultOwner(){
