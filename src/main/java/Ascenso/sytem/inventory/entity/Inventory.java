@@ -4,11 +4,9 @@ package Ascenso.sytem.inventory.entity;
 import Ascenso.sytem.product.entity.Product;
 import Ascenso.sytem.common.entity.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+@Builder
 @Entity
 @Table(
         name = "inventory",
@@ -34,5 +32,18 @@ public class Inventory extends BaseEntity {
     private Product product;
 
     @Column(nullable = false)
-    private Integer quantity = 0;
+    @Builder.Default
+    private Integer quantityAvailable = 0;
+
+
+    @Column(nullable = false)
+    @Builder.Default
+    private Integer quantityOnHand = 0;
+
+
+    @Column(nullable = false)
+    @Builder.Default
+    private Integer quantityReserved = 0;
+
+
 }

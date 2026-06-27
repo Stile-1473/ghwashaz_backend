@@ -1,27 +1,26 @@
 package Ascenso.sytem.supplier.dto;
 
-import lombok.Builder;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
-
 @Getter
 @Setter
-@Builder
-public class SupplierResponseDto {
+public class UpdateSupplierRequestDto {
 
-    private UUID id;
-
+    @NotBlank
     private String companyName;
 
+    @NotBlank
     private String contactPerson;
 
+    @NotBlank
     private String phoneNumber;
 
     private String alternativePhoneNumber;
 
+    @Email
     private String email;
 
     private String address;
@@ -30,8 +29,6 @@ public class SupplierResponseDto {
 
     private String country;
 
-    private Boolean active;
-
-    private LocalDateTime createdAt;
+    private String notes;
 
 }

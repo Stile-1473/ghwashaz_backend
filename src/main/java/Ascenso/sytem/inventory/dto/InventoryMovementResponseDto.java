@@ -1,6 +1,6 @@
 package Ascenso.sytem.inventory.dto;
 
-import Ascenso.sytem.common.enums.StockMovementType;
+import Ascenso.sytem.common.enums.InventoryMovementType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,21 +15,24 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class StockMovementResponseDto {
+public class InventoryMovementResponseDto {
 
     private UUID id;
 
+    private UUID productId;
+
     private String productName;
 
-    private StockMovementType type;
+    private InventoryMovementType type;
 
-    private Integer quantityChanged;
+    private Integer quantity;
 
-    private Integer previousQuantity;
 
-    private Integer newQuantity;
+    private Integer balanceAfterMovement;
 
-    private String reason;
+    private String reference;
+
+    private String remarks;
 
     private String performedBy;
 

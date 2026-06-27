@@ -10,11 +10,9 @@ import java.util.UUID;
 @Getter
 @Setter
 public class StockAdjustmentRequestDto {
-    @NotNull
-    private UUID productId;
 
     @NotNull
-    private Integer newQuantity;
+    private Integer quantity;
 
     @NotBlank
     private String reason;

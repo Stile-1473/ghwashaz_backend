@@ -11,13 +11,22 @@ import java.util.UUID;
 @Setter
 @Builder
 public class InventoryResponseDto {
+
+    private UUID inventoryId;
+
     private UUID productId;
+
+    private String sku;
 
     private String productName;
 
-    private String categoryName;
+    private String category;
 
-    private Integer quantity;
+    private Integer quantityAvailable;
+
+    private Integer quantityOnHand;
+
+    private Integer quantityReserved;
 
     private Integer minimumStockLevel;
 

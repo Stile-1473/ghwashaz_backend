@@ -1,7 +1,9 @@
 package Ascenso.sytem.supplier.service;
 
+import Ascenso.sytem.common.response.PageResponse;
 import Ascenso.sytem.supplier.dto.CreateSupplierRequestDto;
 import Ascenso.sytem.supplier.dto.SupplierResponseDto;
+import Ascenso.sytem.supplier.dto.UpdateSupplierRequestDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -13,17 +15,22 @@ public interface SupplierServiceContract {
 
     SupplierResponseDto getSupplier(UUID id);
 
-    Page<SupplierResponseDto> getSuppliers(
+    PageResponse<SupplierResponseDto> getSuppliers(
       String search,
       Boolean active,
       Pageable pageable
     );
 
+
+
+
     SupplierResponseDto updateSupplier(
             UUID id,
-            CreateSupplierRequestDto requestDto
+            UpdateSupplierRequestDto requestDto
     );
 
+    void activateSupplier(UUID id);
 
+    void deactivateSupplier(UUID id);
 
 }

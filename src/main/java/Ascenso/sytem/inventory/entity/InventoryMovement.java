@@ -1,21 +1,18 @@
 package Ascenso.sytem.inventory.entity;
 
 
-import Ascenso.sytem.common.enums.StockMovementType;
+import Ascenso.sytem.common.enums.InventoryMovementType;
 import Ascenso.sytem.product.entity.Product;
 import Ascenso.sytem.user.entity.User;
 import Ascenso.sytem.common.entity.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.UUID;
 
 @Entity
 @Table(
-        name = "stock_movements",
+        name = "inventory_movements",
         indexes = {
                 @Index(
                         name = "idx_stock_product",
@@ -30,8 +27,9 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
+@Builder
 @AllArgsConstructor
-public class StockMovement extends BaseEntity {
+public class InventoryMovement extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id",nullable = false)
@@ -42,16 +40,23 @@ public class StockMovement extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private StockMovementType type;
+    private InventoryMovementType type;
 
 
-    private String reason;
+    @Column(nullable = false)
+    private Integer balanceAfterMovement;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "performed_by")
     private User performedBy;
 
-    private UUID  referenceId;
+
+    @Column(length = 255)
+    private String reference;
+
+    @Column(length = 500)
+    private String remarks;
+
 
 
 }

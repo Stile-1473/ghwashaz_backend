@@ -17,6 +17,6 @@ public enum AuditActionType {
         STOCK_IN,
         STOCK_OUT,
         SYNC,
-        EXPORT
+    RECEIVE, EXPORT
 
 }

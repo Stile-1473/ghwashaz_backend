@@ -1,38 +1,36 @@
 package Ascenso.sytem.inventory.service;
 
-import Ascenso.sytem.common.enums.StockMovementType;
+import Ascenso.sytem.common.response.PageResponse;
 import Ascenso.sytem.inventory.dto.InventoryResponseDto;
 import Ascenso.sytem.inventory.dto.StockAdjustmentRequestDto;
-import Ascenso.sytem.inventory.dto.StockMovementResponseDto;
-import org.springframework.data.domain.Page;
+import Ascenso.sytem.product.entity.Product;
 import org.springframework.data.domain.Pageable;
 
-import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 
 public interface InventoryServiceContract {
 
-    Page<InventoryResponseDto> getInventory(
+    void createInventory(Product product);
+
+    void receiveStock(Product product, Integer quantity);
+
+
+    void reduceStock(
+            Product product,
+            Integer quantity,
+            String reference,
+            String remarks
+    );
+
+    void adjustStock(UUID productId, StockAdjustmentRequestDto requestDto);
+
+    InventoryResponseDto getInventory(UUID productId);
+
+    PageResponse<InventoryResponseDto> getInventory(
             String search,
-            UUID categoryId,
             Boolean lowStock,
             Pageable pageable
     );
 
-    InventoryResponseDto getProductInventory(UUID productId);
-
-    InventoryResponseDto adjustStock(StockAdjustmentRequestDto requestDto);
-
-    Page<StockMovementResponseDto> getMovements(
-            UUID productId,
-            StockMovementType type,
-            LocalDate startDate,
-            LocalDate endDate,
-            UUID userId,
-            Pageable pageable
-    );
-
-    List<InventoryResponseDto> getLowStockProducts();
-
 }
+
