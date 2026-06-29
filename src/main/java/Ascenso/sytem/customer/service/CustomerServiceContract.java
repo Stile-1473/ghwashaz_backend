@@ -1,11 +1,11 @@
 package Ascenso.sytem.customer.service;
 
 import Ascenso.sytem.common.enums.CustomerType;
+import Ascenso.sytem.common.response.PageResponse;
 import Ascenso.sytem.customer.dto.CreateCustomerRequestDto;
 import Ascenso.sytem.customer.dto.CustomerResponseDto;
 import Ascenso.sytem.customer.dto.CustomerSaleResponseDto;
 import Ascenso.sytem.customer.dto.UpdateCustomerRequestDto;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public interface CustomerServiceContract {
 
     CustomerResponseDto getCustomer(UUID id);
 
-    Page<CustomerResponseDto> getCustomers(
+    PageResponse<CustomerResponseDto> getCustomers(
             String search,
             CustomerType customerType,
             Boolean active,
@@ -26,11 +26,10 @@ public interface CustomerServiceContract {
 
     CustomerResponseDto updateCustomer(UUID customerId, UpdateCustomerRequestDto requestDto);
 
-    Page<CustomerSaleResponseDto> getCustomerSales(
+    PageResponse<CustomerSaleResponseDto> getCustomerSales(
             UUID customerId,
             Pageable pageable
     );
-
 
     List<CustomerResponseDto> getTopCustomers(Integer limit);
 }

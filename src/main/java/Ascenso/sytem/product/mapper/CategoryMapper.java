@@ -7,7 +7,7 @@ import Ascenso.sytem.product.dto.UpdateCategoryRequestDto;
 import Ascenso.sytem.product.entity.Category;
 import org.mapstruct.*;
 
-@Mapper(config = MapperConfiguration.class)
+@Mapper(componentModel = "spring", config = MapperConfiguration.class)
 public interface CategoryMapper {
 
 

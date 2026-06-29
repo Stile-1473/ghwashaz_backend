@@ -6,9 +6,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.util.UUID;
 
-public interface AuditRepository extends JpaRepository<AuditLogs, UUID>,
-        JpaSpecificationExecutor<AuditLogs>
-{
+public interface AuditRepository extends JpaRepository<AuditLogs, UUID>, JpaSpecificationExecutor<AuditLogs> {
 
 
 

@@ -7,7 +7,7 @@ import Ascenso.sytem.supplier.dto.UpdateSupplierRequestDto;
 import Ascenso.sytem.supplier.entity.Supplier;
 import org.mapstruct.*;
 
-@Mapper(config = MapperConfiguration.class)
+@Mapper(componentModel = "spring", config = MapperConfiguration.class)
 public interface SupplierMapper {
 
     @Mapping(target = "active",ignore = true)

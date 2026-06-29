@@ -1,28 +1,33 @@
 package Ascenso.sytem.report.dto;
 
-import Ascenso.sytem.common.enums.PaymentMethod;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
-@Getter
-@Setter
+@Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class SalesReportResponseDto {
 
-    private String saleNumber;
+    private BigDecimal totalSales;
+    private Long transactionCount;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private List<SaleDto> sales;
 
-    private String customer;
-
-    private String cashier;
-
-    private BigDecimal totalAmount;
-
-    private PaymentMethod paymentMethod;
-
-    private LocalDateTime date;
-
+    @Data
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class SaleDto {
+        private String saleNumber;
+        private BigDecimal totalAmount;
+        private String paymentMethod;
+        private String cashier;
+        private LocalDateTime date;
+    }
 }

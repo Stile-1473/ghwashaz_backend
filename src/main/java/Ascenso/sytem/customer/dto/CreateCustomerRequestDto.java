@@ -1,8 +1,7 @@
 package Ascenso.sytem.customer.dto;
 
 import Ascenso.sytem.common.enums.CustomerType;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,22 +9,20 @@ import lombok.Setter;
 @Setter
 public class CreateCustomerRequestDto {
 
+    @NotBlank(message = "Name is required")
+    @Size(min = 2, max = 100, message = "Name must be between 2 and 100 characters")
     private String fullName;
 
-    @Pattern(
-            regexp="^(\\+263|[0-9]{9}$",
-            message = "Invalid phone number"
-    )
+    @NotBlank(message = "Phone number is required")
+    @Pattern(regexp = "^\\+?[0-9]{10,15}$", message = "Invalid phone number")
     private String phoneNumber;
 
+    @Email(message = "Invalid email format")
+    private String email;
+
+    @Size(max = 200, message = "Address too long")
     private String address;
 
-
-    @NotNull(message = "Customer type is required")
+    @NotNull
     private CustomerType customerType;
-
-    private String notes;
-
-
-
 }

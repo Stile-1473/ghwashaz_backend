@@ -2,36 +2,39 @@ package Ascenso.sytem.sale.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
-@Setter
 @Builder
 public class ReceiptResponseDto {
 
+    private UUID id;
     private String saleNumber;
-
-    private String shopName;
-
-    private String shopPhone;
-
-    private String cashier;
-
-    private String customer;
-
-    private List<SaleItemResponseDto> items;
-
-    private BigDecimal subtotal;
-
-    private BigDecimal discount;
-
+    private String cashierName;
+    private String customerName;
     private BigDecimal total;
+    private List<ReceiptItem> items;
+    private List<ReceiptPayment> payments;
+    private LocalDateTime createdAt;
+    
+    @Getter
+    @Builder
+    public static class ReceiptItem {
+        private String productName;
+        private Integer quantity;
+        private BigDecimal unitPrice;
+        private BigDecimal lineTotal;
+    }
+    
+    @Getter
+    @Builder
+    public static class ReceiptPayment {
+        private String paymentMethod;
+        private BigDecimal amount;
+    }
 
-    private LocalDateTime saleDate;
-
-    private String thankYouMessage;
 }

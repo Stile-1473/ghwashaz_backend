@@ -15,6 +15,8 @@ import java.util.UUID;
 public class CustomerResponseDto {
     private UUID id;
     private String fullName;
+    private String phoneNumber;
+    private String email;
     private String address;
     private CustomerType customerType;
     private BigDecimal totalSpent;

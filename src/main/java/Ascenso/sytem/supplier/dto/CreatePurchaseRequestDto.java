@@ -1,4 +1,4 @@
-package Ascenso.sytem.purchase.dto;
+package Ascenso.sytem.supplier.dto;
 
 import Ascenso.sytem.supplier.dto.PurchaseItemRequestDto;
 import jakarta.validation.Valid;

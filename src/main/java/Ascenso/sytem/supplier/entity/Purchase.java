@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
 @Table(name = "purchases")
 @Getter
@@ -27,7 +28,7 @@ public class Purchase extends BaseEntity {
     private Supplier supplier;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = true)
     private User receivedBy;
 
     @Enumerated(EnumType.STRING)
@@ -49,6 +50,9 @@ public class Purchase extends BaseEntity {
     @Column(length = 500)
     private String notes;
 
+    @Column(length = 500)
+    private String receiptImageUrl;
+
     @OneToMany(
             mappedBy = "purchase",
             cascade = CascadeType.ALL,
@@ -56,5 +60,6 @@ public class Purchase extends BaseEntity {
     )
     @Builder.Default
     private List<PurchaseItem> items = new ArrayList<>();
+
 
 }

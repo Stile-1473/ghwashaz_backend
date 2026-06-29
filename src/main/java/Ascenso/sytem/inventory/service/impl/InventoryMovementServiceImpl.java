@@ -7,7 +7,6 @@ import Ascenso.sytem.inventory.mapper.InventoryMapper;
 import Ascenso.sytem.inventory.repository.InventoryMovementRepository;
 import Ascenso.sytem.inventory.service.InventoryMovementServiceContract;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +24,7 @@ public class InventoryMovementServiceImpl implements InventoryMovementServiceCon
             UUID productId,
             Pageable pageable
     ) {
-        // If productId filtering is required, we should add proper repository/specification support.
-        // For now, show movements paginated; productId is ignored until repository filtering is added.
+
         return PageMapper.from(
                 movementRepository.findAll(pageable).map(inventoryMapper::toMovementResponse)
         );

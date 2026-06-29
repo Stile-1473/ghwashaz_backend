@@ -26,45 +26,28 @@ import java.util.List;
 @AllArgsConstructor
 public class Customer extends BaseEntity {
 
-    @Column(
-            name ="full_name",
-            length=100
-    )
+    @Column(name ="full_name", length=100)
     private String fullName;
 
-    @Column(
-            name = "phone_number",
-            length =20,
-            unique = true
-    )
+    @Column(name = "phone_number", length =20, unique = true)
     private String phoneNumber;
 
+    @Column(length = 100)
+    private String email;
+
     @Enumerated(EnumType.STRING)
-    @Column(
-            name = "customer_type",
-            nullable = false
-    )
+    @Column(name = "customer_type", nullable = false)
     private CustomerType customerType;
 
     @Column(columnDefinition = "TEXT")
     private String address;
 
-    @Column(
-            length =255
-    )
+    @Column(length = 255)
     private String notes;
 
-
     @Column(nullable = false)
-    private Boolean isActive = true;
+    private Boolean active = true;
 
-    @OneToMany(
-            mappedBy = "customer",
-            fetch =FetchType.LAZY
-    )
+    @OneToMany(mappedBy = "customer", fetch =FetchType.LAZY)
     private List<Sale> sales = new ArrayList<>();
-
-
-
-
 }

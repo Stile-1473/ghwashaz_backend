@@ -12,7 +12,7 @@ import Ascenso.sytem.user.entity.User;
 
 
 
-@Mapper(config = MapperConfiguration.class)
+@Mapper(componentModel = "spring", config = MapperConfiguration.class)
 public interface InventoryMapper {
 
 
@@ -39,8 +39,7 @@ public interface InventoryMapper {
             InventoryMovement movement
     );
 
-    // MapStruct will fail to map performedBy automatically unless User->String mapping exists.
-    // This default method provides a safe fallback.
+   //mapping a user
     default String map(User user){
         if (user == null) {
             return null;

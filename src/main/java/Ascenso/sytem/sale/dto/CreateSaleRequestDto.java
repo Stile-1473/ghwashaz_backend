@@ -19,6 +19,10 @@ public class CreateSaleRequestDto {
     //optional
     private UUID customerId;
 
+    
+    private String notes;
+
+
     @NotNull(message = "Payment method is required")
     private PaymentMethod paymentMethod;
 
@@ -27,7 +31,6 @@ public class CreateSaleRequestDto {
 
     @NotEmpty(message = "Sale must have at least one item")
     private List<SaleItemRequestDto> items;
-
 
 
 }

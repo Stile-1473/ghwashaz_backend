@@ -1,6 +1,9 @@
 package Ascenso.sytem.common.enums;
 
 public enum SaleStatus {
+    DRAFT,
     COMPLETED,
-    VOIDED
+    CANCELLED,
+    VOIDED,
+    REFUNDED
 }

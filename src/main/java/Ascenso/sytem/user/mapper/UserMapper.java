@@ -13,7 +13,7 @@ import org.mapstruct.Mapping;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Mapper(config = MapperConfiguration.class)
+@Mapper(componentModel = "spring", config = MapperConfiguration.class)
 public interface UserMapper {
 
     @Mapping(target = "passwordHash",ignore = true)

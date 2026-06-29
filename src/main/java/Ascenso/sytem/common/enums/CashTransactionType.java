@@ -1,12 +1,16 @@
 package Ascenso.sytem.common.enums;
 
-public enum CashTransactionType {
 
-    OPENING_BALANCE,
-    CASH_SALE,
-    OWNER_WITHDRAW,
+public enum CashTransactionType {
+    SALE,
+    SALE_REFUND,
+    PURCHASE,
+    PURCHASE_RETURN,
+    CASH_FLOAT,
+    OWNER_WITHDRAWAL,
     CASH_DEPOSIT,
-    CASH_REFUND,
-    CASH_EXPENSE,
+    CASH_IN,
+    CASH_OUT,
+    EXPENSE,
     CASH_ADJUSTMENT
 }

@@ -1,45 +1,20 @@
 package Ascenso.sytem.report.service;
 
-import Ascenso.sytem.common.enums.PaymentMethod;
 import Ascenso.sytem.report.dto.*;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.UUID;
 
 public interface ReportServiceContract {
 
-    DashboardResponseDto getDashBoard();
+    DailySalesReportResponseDto getDailySalesReport(LocalDate date);
 
-    Page<SalesReportResponseDto> getSalesReport(
-            LocalDate startDate,
-            LocalDate endDate,
-            UUID cashierId,
-            UUID customerId,
-            PaymentMethod paymentMethod,
-            Pageable pageable
-    );
+    SalesReportResponseDto getSalesByPeriod(ReportQueryDto query);
 
-    ProfitReportResponseDto getProfitReport(
-            LocalDate startDate,
-            LocalDate endDate
-    );
+    ExpenseReportResponseDto getExpenseReport(ReportQueryDto query);
 
-    List<TopProductReportResponseDto> getTopProducts(
-            Integer limit,
-            LocalDate startDate,
-            LocalDate endDate
-    );
+    CashFlowReportResponseDto getCashFlowReport(ReportQueryDto query);
 
-    List<CustomerAnalyticsResponseDto> getCustomerAnalytics(Integer limit);
+    InventoryReportResponseDto getInventoryReport();
 
-    List<CashierReportResponseDto> getCashierPerformance(
-            LocalDate startDate,
-            LocalDate endDate
-    );
-
-    List<InventoryValueResponseDto> getInventoryValue();
-
+    ProfitLossReportResponseDto getProfitLossReport(ReportQueryDto query);
 }

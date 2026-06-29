@@ -6,6 +6,7 @@ import Ascenso.sytem.common.enums.AuditModule;
 
 import Ascenso.sytem.common.mapper.PageMapper;
 import Ascenso.sytem.common.response.PageResponse;
+import Ascenso.sytem.inventory.service.InventoryServiceContract;
 import Ascenso.sytem.product.dto.CreateProductRequestDto;
 import Ascenso.sytem.product.dto.ProductResponseDto;
 import Ascenso.sytem.product.dto.UpdateProductRequestDto;
@@ -45,6 +46,8 @@ public class ProductServiceImpl implements ProductServiceContract {
 
     private final AuditServiceContract auditService;
 
+    private final InventoryServiceContract inventoryServiceContract;
+
     @Override
     public ProductResponseDto createProduct(CreateProductRequestDto requestDto) {
 
@@ -73,6 +76,9 @@ public class ProductServiceImpl implements ProductServiceContract {
 
         Product saved =
                 productRepository.save(product);
+
+        inventoryServiceContract.createInventory(saved);
+
 
         try {
             auditService.log(

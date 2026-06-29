@@ -26,8 +26,7 @@ public class UserController {
     private final UserServiceContract userService;
 
 
-    //create user APi
-
+    //Create User
     @PostMapping
     @PreAuthorize("hasAuthority(T(Ascenso.sytem.common.constants.Permissions).USER_MANAGE)")
     public ResponseEntity<ApiResponse<UserResponseDto>> create(
@@ -44,8 +43,7 @@ public class UserController {
     }
 
 
-    //Get user by id API
-
+    //Get User
     @GetMapping("/{id}")
     @PreAuthorize(
             "hasAuthority(T(Ascenso.sytem.common.constants.Permissions).USER_MANAGE)"
@@ -64,13 +62,16 @@ public class UserController {
         );
     }
 
+
+    //Update user
     @PutMapping("/{id}")
     @PreAuthorize(
             "hasAuthority(T(Ascenso.sytem.common.constants.Permissions).USER_MANAGE)"
     )
     public ResponseEntity<ApiResponse<UserResponseDto>> updateUser(
-            @Valid
+
             @PathVariable UUID id,
+            @Valid
             @RequestBody UpdateUserRequestDto dto
             ){
 
@@ -84,12 +85,13 @@ public class UserController {
 
     }
 
+    //activate user
     @PatchMapping("/{id}/activate")
     @PreAuthorize(
             "hasAuthority(T(Ascenso.sytem.common.constants.Permissions).USER_MANAGE)"
     )
 
-    public ResponseEntity<ApiResponse> activateUser(@Valid @PathVariable UUID id) {
+    public ResponseEntity<ApiResponse> activateUser( @PathVariable UUID id) {
 
         userService.activateUser(id);
       return  ResponseEntity.ok( ApiResponse.builder()
@@ -105,12 +107,13 @@ public class UserController {
     }
 
 
+    //deactivate user
     @PatchMapping("/{id}/deactivate")
     @PreAuthorize(
             "hasAuthority(T(Ascenso.sytem.common.constants.Permissions).USER_MANAGE)"
     )
 
-    public ResponseEntity<ApiResponse> deactivateUser(@Valid @PathVariable UUID id) {
+    public ResponseEntity<ApiResponse> deactivateUser( @PathVariable UUID id) {
 
         userService.deactivateUser(id);
         return  ResponseEntity.ok( ApiResponse.builder()
@@ -127,6 +130,7 @@ public class UserController {
 
 
 
+    //Change password
     @PatchMapping("/change-password")
     @PreAuthorize(
             "hasAuthority(T(Ascenso.sytem.common.constants.Permissions).USER_MANAGE)"
@@ -148,6 +152,7 @@ public class UserController {
 
     }
 
+    //Reset user password (used only by owner to reset users password)
     @PatchMapping("/{id}/reset-password")
     @PreAuthorize(
             "hasAuthority(T(Ascenso.sytem.common.constants.Permissions).USER_MANAGE)"
@@ -170,6 +175,7 @@ public class UserController {
 
     }
 
+    //Search users
     @GetMapping
     @PreAuthorize(
             "hasAuthority(T(Ascenso.sytem.common.constants.Permissions).USER_MANAGE)"
@@ -188,6 +194,7 @@ public class UserController {
 
     }
 
+    //Get current user details
     @GetMapping("/me")
     public ResponseEntity<ApiResponse<UserResponseDto>> me() {
 

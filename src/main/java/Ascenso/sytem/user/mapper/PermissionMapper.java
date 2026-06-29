@@ -4,7 +4,7 @@ import Ascenso.sytem.common.mapper.MapperConfiguration;
 import Ascenso.sytem.user.entity.Permission;
 import org.mapstruct.Mapper;
 
-@Mapper(config = MapperConfiguration.class)
+@Mapper(componentModel = "spring", config = MapperConfiguration.class)
 public interface PermissionMapper {
 
     default String toString(Permission permission) {

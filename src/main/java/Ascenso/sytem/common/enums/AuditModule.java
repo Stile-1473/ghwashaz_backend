@@ -11,6 +11,7 @@ public enum AuditModule {
     PURCHASE,
     INVENTORY,
     SALE,
+    FINANCE,
     CASH_MANAGEMENT,
     REPORT,
     SETTINGS,

@@ -15,22 +15,13 @@ public interface InventoryServiceContract {
     void receiveStock(Product product, Integer quantity);
 
 
-    void reduceStock(
-            Product product,
-            Integer quantity,
-            String reference,
-            String remarks
-    );
+    void reduceStock(Product product, Integer quantity, String reference, String remarks);
 
     void adjustStock(UUID productId, StockAdjustmentRequestDto requestDto);
 
     InventoryResponseDto getInventory(UUID productId);
 
-    PageResponse<InventoryResponseDto> getInventory(
-            String search,
-            Boolean lowStock,
-            Pageable pageable
-    );
+    PageResponse<InventoryResponseDto> getInventory(String search, Boolean lowStock, Pageable pageable);
 
 }
 

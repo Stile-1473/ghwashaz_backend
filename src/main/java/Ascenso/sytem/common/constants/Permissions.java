@@ -6,7 +6,7 @@ public final class Permissions {
 
     public static final String PRODUCT_VIEW = "PRODUCT_VIEW";
     public static final String PRODUCT_CREATE = "PRODUCT_CREATE";
-    public static final String PRODUCT_UPDATE ="PRODUCT_UPDATE";
+    public static final String PRODUCT_UPDATE = "PRODUCT_UPDATE";
     public static  final String PRODUCT_DELETE = "PRODUCT_DELETE";
 
     public static final String CATEGORY_VIEW = "CATEGORY_VIEW";
@@ -19,15 +19,25 @@ public final class Permissions {
     public static final String SALE_CREATE = "SALE_CREATE";
     public static final String SALE_VIEW = "SALE_VIEW";
     public static final String SALE_VOID = "SALE_VOID";
+    public static final String SALE_REFUND = "SALE_REFUND";
 
     public static final String PURCHASE_CREATE = "PURCHASE_CREATE";
     public static final String PURCHASE_APPROVE = "PURCHASE_APPROVE";
+    public static final String PURCHASE_VIEW = "PURCHASE_VIEW";
+    public static final String PURCHASE_RECEIVE = "PURCHASE_RECEIVE";
+    public static final String PURCHASE_APPROVE_SHORT = "PURCHASE_APPROVE_SHORT";
+    public static final String PURCHASE_CANCEL = "PURCHASE_CANCEL";
+
 
     public static final String INVENTORY_ADJUST = "INVENTORY_ADJUST";
     public static final String INVENTORY_VIEW = "INVENTORY_VIEW";
 
     public static final String CASH_WITHDRAW = "CASH_WITHDRAW";
+    public static final String CASH_DEPOSIT = "CASH_DEPOSIT";
     public static final String CASH_VIEW = "CASH_VIEW";
+
+    public static final String EXPENSE_CREATE = "EXPENSE_CREATE";
+    public static final String EXPENSE_VIEW = "EXPENSE_VIEW";
 
     public static final String REPORT_VIEW = "REPORT_VIEW";
 

@@ -7,7 +7,7 @@ import Ascenso.sytem.product.dto.UpdateProductRequestDto;
 import Ascenso.sytem.product.entity.Product;
 import org.mapstruct.*;
 
-@Mapper(config = MapperConfiguration.class)
+@Mapper(componentModel = "spring", config = MapperConfiguration.class)
 public interface ProductMapper {
 
     @Mapping(target = "id",ignore = true)
